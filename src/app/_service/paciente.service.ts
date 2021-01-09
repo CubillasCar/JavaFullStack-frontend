@@ -12,7 +12,7 @@ export class PacienteService {
 
   //permite enterarse de cambios variable reactiva
   //se almacena una nueva lista de pacientes de pues de hacer un GET, PUT O POST
-  pacienteCambio = new Subject<Paciente[]>();
+  private pacienteCambio = new Subject<Paciente[]>();
 
   private url: string =`${environment.HOST}/pacientes`;
 
