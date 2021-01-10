@@ -1,8 +1,10 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PacienteService } from 'src/app/_service/paciente.service';
 import { Paciente } from './../../../_model/paciente';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -71,16 +73,27 @@ export class PacienteEdicionComponent implements OnInit {
 
     if(this.edicion){
       //MODIFICAR
-      this.pacienteService.modificar(paciente).subscribe( ()=> {
+     
+
+     /* this.pacienteService.modificar(paciente).subscribe( ()=> {
         this.pacienteService.listar().subscribe(data => {
           this.pacienteService.pacienteCambio.next(data);
         })
-      });
+      });*/
+      
+      //PRACTICA IDEAL
+      //PIPE permite seguir haciendo llamadas o concatenando
+      this.pacienteService.modificar(paciente).pipe(switchMap( () =>{
+        return this.pacienteService.listar();
+      })).subscribe(data =>{
+        this.pacienteService.setPacienteCambio(data);
+      })
     }else{
       //REGISTRAR
+      //PRACTICA COMUN
       this.pacienteService.registrar(paciente).subscribe( ()=> {
         this.pacienteService.listar().subscribe(data => {
-          this.pacienteService.pacienteCambio.next(data);
+          this.pacienteService.setPacienteCambio(data);
       });  
       });
     }

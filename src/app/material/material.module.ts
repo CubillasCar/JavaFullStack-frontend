@@ -13,6 +13,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [],
@@ -29,7 +31,8 @@ import { MatCardModule } from '@angular/material/card';
     MatMenuModule,
     MatDividerModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorImpl }],
 })

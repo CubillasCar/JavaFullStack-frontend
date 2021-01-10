@@ -23,7 +23,7 @@ export class PacienteComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.pacienteService.pacienteCambio.subscribe(data =>{
+    this.pacienteService.getPacienteCambio().subscribe(data =>{
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

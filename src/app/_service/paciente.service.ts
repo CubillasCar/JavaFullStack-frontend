@@ -39,4 +39,16 @@ export class PacienteService {
     return this.http.delete(`${this.url}/${id}`);
    }
 
+   ////////////////////// GET AND SET //////////////////////////
+
+   getPacienteCambio(){
+     return this.pacienteCambio.asObservable();
+   }
+
+   setPacienteCambio(pacientes: Paciente[]){
+     this.pacienteCambio.next(pacientes)
+   }
+
+
+
 }
