@@ -80,13 +80,14 @@ export class PacienteEdicionComponent implements OnInit {
           this.pacienteService.pacienteCambio.next(data);
         })
       });*/
-      
+
       //PRACTICA IDEAL
       //PIPE permite seguir haciendo llamadas o concatenando
       this.pacienteService.modificar(paciente).pipe(switchMap( () =>{
         return this.pacienteService.listar();
       })).subscribe(data =>{
         this.pacienteService.setPacienteCambio(data);
+        this.pacienteService.setMensajeCambio('SE MODIFICO')
       })
     }else{
       //REGISTRAR
@@ -94,6 +95,7 @@ export class PacienteEdicionComponent implements OnInit {
       this.pacienteService.registrar(paciente).subscribe( ()=> {
         this.pacienteService.listar().subscribe(data => {
           this.pacienteService.setPacienteCambio(data);
+          this.pacienteService.setMensajeCambio('SE REGISTRO')
       });  
       });
     }

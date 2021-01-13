@@ -13,6 +13,7 @@ export class PacienteService {
   //permite enterarse de cambios variable reactiva
   //se almacena una nueva lista de pacientes de pues de hacer un GET, PUT O POST
   private pacienteCambio = new Subject<Paciente[]>();
+  private mensajeCambio = new Subject<string>();
 
   private url: string =`${environment.HOST}/pacientes`;
 
@@ -49,6 +50,14 @@ export class PacienteService {
      this.pacienteCambio.next(pacientes)
    }
 
+   
+   getMensajeCambio(){
+     return this.mensajeCambio.asObservable();
+   }
+
+   setMensajeCambio(mensaje: string){
+     return this.mensajeCambio.next(mensaje);
+   }
 
 
 }

@@ -4,6 +4,8 @@ import { Paciente } from './../../_model/paciente';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { switchMap, switchMapTo } from 'rxjs/operators';
 
 
 @Component({
@@ -19,7 +21,10 @@ export class PacienteComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private pacienteService: PacienteService) { }
+  constructor(
+    private pacienteService: PacienteService,
+    private snackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
 
@@ -29,6 +34,10 @@ export class PacienteComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
     
+    this.pacienteService.getMensajeCambio().subscribe(data =>{
+      this.snackBar.open(data, 'AVISO', {duration: 3000})
+    })
+
     this.pacienteService.listar().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
@@ -38,6 +47,15 @@ export class PacienteComponent implements OnInit {
   }
   filtrar(valor: string){
       this.dataSource.filter = valor.trim().toLowerCase();
+  }
+
+  eliminar(idPaciente: number){
+    this.pacienteService.eliminar(idPaciente).pipe(switchMap(()=> {
+      return this.pacienteService.listar()
+    })).subscribe(data => {
+      this.pacienteService.setPacienteCambio(data);
+      this.pacienteService.setMensajeCambio('SE ELIMINO');
+    });
   }
 
 }
