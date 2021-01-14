@@ -12,7 +12,9 @@
     </div>
 
     <mat-form-field class="example-full-width">            
-        <input matInput placeholder="Nombres" minlength="3" required formControlName="nombres">               
+        <input matInput placeholder="Nombres"  formControlName="nombres">     
+        <small *ngIf="f.nombres.errors?.required && f.nombres.touched" class="invalido" > Nombre es requerido  </small>  
+        <small *ngIf="f.nombres.errors?.minlength && f.nombres.touched" class="invalido" > El campo debe ser mayor a 3 caracteres  </small>        
     </mat-form-field>
 
     <mat-form-field class="example-full-width">        
@@ -33,6 +35,7 @@
 
     <mat-form-field class="example-full-width">
         <input matInput placeholder="Email" required formControlName="email">
+        <small *ngIf="f.email.errors?.required && f.email.touched" class="invalido" > example@dominio.com  </small>  
     </mat-form-field>
 
 

@@ -1,6 +1,6 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PacienteService } from 'src/app/_service/paciente.service';
 import { Paciente } from './../../../_model/paciente';
@@ -24,15 +24,17 @@ export class PacienteEdicionComponent implements OnInit {
     private pacienteService: PacienteService
   ) {}
 
+
+
   ngOnInit(): void {
     this.form = new FormGroup({
       'id': new FormControl(0),
-      'nombres': new FormControl(''),
-      'apellidos': new FormControl(''),
+      'nombres': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'apellidos': new FormControl('', [Validators.required]),
       'dni': new FormControl(''),
       'telefono': new FormControl(''),
       'direccion': new FormControl(''),
-      'email': new FormControl('')
+      'email': new FormControl('', [Validators.required, Validators.email])
     });
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
@@ -40,6 +42,12 @@ export class PacienteEdicionComponent implements OnInit {
       this.initForm();
     });
   }
+
+  //creacioon de metodo de lecutura que permite que devuelva informnacion
+  get f() {
+    return this.form.controls;
+  }
+
 
   private initForm() {
     if (this.edicion){
@@ -60,6 +68,10 @@ export class PacienteEdicionComponent implements OnInit {
 
   //para el evento ngSubmit
   operar(){
+
+    if (this.form.invalid) {
+      return;
+    }
 
     let paciente = new Paciente();
     paciente.idPaciente =this.form.value['id'];
