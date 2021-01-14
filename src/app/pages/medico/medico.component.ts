@@ -7,6 +7,7 @@ import { MedicoService } from './../../_service/medico.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { switchMap } from 'rxjs/operators';
+import { MedicoDialogoComponent } from './medico-dialogo/medico-dialogo.component';
 
 
 @Component({
@@ -64,7 +65,11 @@ eliminar(medico: Medico){
 }
 
 abrirDialogo(medico?: Medico) {
-
+  let med= medico != null ? medico: new Medico();
+  this.dialog.open(MedicoDialogoComponent, {
+    width: '250px',
+    data: med
+  })
 }
 
 }
