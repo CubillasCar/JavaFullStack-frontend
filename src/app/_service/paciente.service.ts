@@ -27,7 +27,27 @@ export class PacienteService extends GenericService<Paciente> {
     );
    };
 
-   //METODO MANUAL
+   
+   ////////////////////// GET AND SET //////////////////////////
+
+   getPacienteCambio(){
+     return this.pacienteCambio.asObservable();
+   }
+
+   setPacienteCambio(pacientes: Paciente[]){
+     this.pacienteCambio.next(pacientes)
+   }
+
+   
+   getMensajeCambio(){
+     return this.mensajeCambio.asObservable();
+   }
+
+   setMensajeCambio(mensaje: string){
+     return this.mensajeCambio.next(mensaje);
+   }
+   
+//METODO MANUAL
    // private url: string =`${environment.HOST}/pacientes`;
 /*
   constructor(private http: HttpClient) { }
@@ -52,24 +72,5 @@ export class PacienteService extends GenericService<Paciente> {
     return this.http.delete(`${this.url}/${id}`);
    }
 */
-   ////////////////////// GET AND SET //////////////////////////
-
-   getPacienteCambio(){
-     return this.pacienteCambio.asObservable();
-   }
-
-   setPacienteCambio(pacientes: Paciente[]){
-     this.pacienteCambio.next(pacientes)
-   }
-
-   
-   getMensajeCambio(){
-     return this.mensajeCambio.asObservable();
-   }
-
-   setMensajeCambio(mensaje: string){
-     return this.mensajeCambio.next(mensaje);
-   }
-
 
 }
