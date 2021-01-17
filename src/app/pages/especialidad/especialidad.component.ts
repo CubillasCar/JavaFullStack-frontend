@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, enableProdMode } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Especialidad } from './../../_model/especialidad';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,7 +7,6 @@ import { EspecialidadService } from './../../_service/especialidad.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-especialidad',
@@ -18,7 +17,6 @@ export class EspecialidadComponent implements OnInit {
 
   displayedColumns = ['id', 'nombre', 'acciones'];
   dataSource: MatTableDataSource<Especialidad>;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -31,32 +29,33 @@ export class EspecialidadComponent implements OnInit {
   ngOnInit(): void {
     this.especialidadService.getEspecialidadCambio().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort =this.sort;
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
 
     this.especialidadService.getMensajeCambio().subscribe(data => {
-      this.snackBar.open(data, 'Aviso', { duration: 2500,
+      this.snackBar.open(data, 'Aviso', {
+        duration: 2000,
       });
     });
 
     this.especialidadService.listar().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort =  this.sort;
-      this.dataSource.paginator =  this.paginator;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
   }
 
-  filtrar(valor: string){
-    this.dataSource.filter = valor.trim().toLocaleLowerCase();
+  filtrar(valor: string) {
+    this.dataSource.filter = valor.trim().toLowerCase();
   }
 
-  eliminar(especialidad: Especialidad){
+  eliminar(especialidad: Especialidad) {
     this.especialidadService.eliminar(especialidad.idEspecialidad).pipe(switchMap(() => {
       return this.especialidadService.listar();
     })).subscribe(data => {
       this.especialidadService.setEspecialidadCambio(data);
-      this.especialidadService.setMensajeCambio('Se elimino');
+      this.especialidadService.setMensajeCambio('Se eliminó');
     });
   }
 

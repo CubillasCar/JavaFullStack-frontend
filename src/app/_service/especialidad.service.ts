@@ -16,29 +16,25 @@ export class EspecialidadService extends GenericService<Especialidad> {
   constructor(protected http: HttpClient) {
     super(
       http,
-      `${environment.HOST}/especialidades`
-    );
-   }
+      `${environment.HOST}/especialidades`);
+  }
 
-//get Subjects
-   
-   getEspecialidadCambio(){
-     return this.especialidadCambio.asObservable();
-   }
+  //get Subjects
+  getEspecialidadCambio() {
+    return this.especialidadCambio.asObservable();
+  }
 
-   getMensajeCambio(){
+  getMensajeCambio() {
     return this.mensajeCambio.asObservable();
   }
 
-
-   //set Subjects
-
-  setEspecialidadCambio(especialidades: Especialidad[]){
-    this.especialidadCambio.next(especialidades)
+  //set Subjects
+  setEspecialidadCambio(especialdades: Especialidad[]) {
+    this.especialidadCambio.next(especialdades);
   }
 
-  setMensajeCambio(mensaje: string){
-    return this.mensajeCambio.next(mensaje);
+  setMensajeCambio(mensaje: string) {
+    this.mensajeCambio.next(mensaje);
   }
 
 }

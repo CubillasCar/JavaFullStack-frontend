@@ -9,30 +9,33 @@ import { ExamenComponent } from './pages/examen/examen.component';
 import { ExamenEdicionComponent } from './pages/examen/examen-edicion/examen-edicion.component';
 
 
+
 //Reglas de navegacion
 const routes: Routes = [
   { path: 'paciente', component: PacienteComponent, children: [
     {path: 'nuevo', component: PacienteEdicionComponent},
     {path: 'edicion/:id', component: PacienteEdicionComponent}
+  ]
+},
+{ path: 'especialidad', component: EspecialidadComponent, children: [
+  {path: 'nuevo', component: EspecialidadEdicionComponent},
+  {path: 'edicion/:id', component: EspecialidadEdicionComponent}
+]
+},
+{ path: 'examen', component: ExamenComponent, children: [
+  {path: 'nuevo', component: ExamenEdicionComponent},
+  {path: 'edicion/:id', component:ExamenEdicionComponent}
+]
+},
 
-  ]},
-  { path: 'especialidad', component: EspecialidadComponent, children: [
-    {path: 'nuevo', component: EspecialidadEdicionComponent},
-    {path: 'edicion/:id', component: EspecialidadEdicionComponent}
-
-  ]},
-  { path: 'examen', component: ExamenComponent, children: [
-    {path: 'nuevo', component: ExamenEdicionComponent},
-    {path: 'edicion/:id', component: ExamenEdicionComponent}
-
-  ]},
   { path: 'medico', component: MedicoComponent }
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
- 
+
+
 exports: [RouterModule]
 })
 export class AppRoutingModule { }
