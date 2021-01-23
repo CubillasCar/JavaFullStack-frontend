@@ -23,6 +23,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [],
@@ -49,7 +51,9 @@ exports: [
     MatExpansionModule,
     MatListModule,
     MatAutocompleteModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSlideToggleModule,
+    MatGridListModule
   
   ],
   providers: [
