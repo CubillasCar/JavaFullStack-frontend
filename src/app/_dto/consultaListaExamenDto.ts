@@ -4,5 +4,5 @@ import { Consulta } from './../_model/consulta';
 
 export class ConsultaListaExamenDTO{
     consulta: Consulta;
-    lstExamen: Examen;
+    lstExamen: Examen[];
 }

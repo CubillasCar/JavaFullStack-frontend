@@ -29,13 +29,14 @@
   
     <mat-sidenav-container class="example-sidenav-container">
         <mat-sidenav #sidenav style="width: 200px" mode="push">
-            <img src="assets/icono-Felodin.png" width="128" style="margin-left: 20px">
+            <img src="assets/consulta.jpg" width="128" style="margin-left: 20px">
       
             <button mat-menu-item (click)="sidenav.toggle()" routerLink="/buscar" style="cursor: pointer">
                 <mat-icon>search</mat-icon>
                 <span>Buscar</span>
             </button>
             <mat-divider></mat-divider>
+        
             <button mat-menu-item (click)="sidenav.toggle()" routerLink="/consulta" style="cursor: pointer">
                 <mat-icon>insert_drive_file</mat-icon>
                 <span>Registrar</span>
@@ -61,20 +62,27 @@
                 <span>Médicos</span>
             </button>
             <mat-divider></mat-divider>
+            
+  
+        
+      
             <button mat-menu-item (click)="sidenav.toggle()" routerLink="/examen" style="cursor: pointer">
                 <mat-icon>assignment</mat-icon>
                 <span>Examenes</span>
             </button>
+      
             <mat-divider></mat-divider>
             <button mat-menu-item (click)="sidenav.toggle()" routerLink="/paciente" style="cursor: pointer">
                 <mat-icon>accessibility</mat-icon>
                 <span>Pacientes</span>
             </button>
             <mat-divider></mat-divider>
+       
             <button mat-menu-item (click)="sidenav.toggle()" routerLink="/reporte" style="cursor: pointer">
                 <mat-icon>assessment</mat-icon>
                 <span>Reportes</span>
             </button>
+            
         </mat-sidenav>
         
         <mat-sidenav-content>
